@@ -1,0 +1,32 @@
+﻿using CQRSAssignment.Data;
+using CQRSAssignment.Models;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+namespace CQRSAssignment.Application.Commands
+{
+    public class UpdateStudentHandler : IRequestHandler<UpdateStudentCommand, bool>
+    {
+        private readonly AppDbContext _context;
+        public UpdateStudentHandler(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<bool> Handle(UpdateStudentCommand request, CancellationToken cancellationToken)
+        {
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken);
+
+            if (student == null)
+                return false;
+
+            student.Name = request.Name;
+            student.Email = request.Email;
+            student.Age = request.Age;
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return true;
+        }
+    }
+}
