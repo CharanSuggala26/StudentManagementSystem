@@ -4,4 +4,4 @@ This project demonstrates a clean and maintainable architecture using CQRS (Comm
 It performs CRUD operations for a Student entity using separate Commands and Queries
 
 # Project Architecture
-![Project A4rchitecture]()
+![Project A4rchitecture](https://github.com/CharanSuggala26/StudentManagementSystem/blob/main/Project_Architecture.png)
